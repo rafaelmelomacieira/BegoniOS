@@ -12,5 +12,5 @@
                     Y8b d88P                                              
                      "Y88P"                                               
 ```
-"Tiny to Tinies"
+"Tiny for Tinies"
 # BegoniOS
