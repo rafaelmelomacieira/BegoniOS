@@ -14,3 +14,9 @@
 ```
 "Tiny for Tinies"
 # BegoniOS
+
+# Architectures Supported
+- RV32IMAC
+
+# Platforms Supported
+- gd32vf103_longan_nano
