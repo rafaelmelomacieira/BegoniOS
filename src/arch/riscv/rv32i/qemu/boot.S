@@ -1,7 +1,7 @@
 .equ UART_BASE, 0x10000000
 
 .section .text
-  la a0, helloworld   # Load address of string
+  la a0, begioslogo   # Load address of string
   li a1, UART_BASE    # Load uart tx base address
   call puts           # Print string
 
@@ -22,4 +22,6 @@ puts:
 
 
 .section .data
-helloworld: .string "Hello World!"
+ begioslogo: .string "\n\nRISC-V - RV32I - QEMU VIRT\n▗▄▄▖ ▗▄▄▄▖ ▗▄▄▖ ▗▄▖ ▗▖  ▗▖▗▄▄▄▖ ▗▄▖  ▗▄▄▖    ▗▄▄▄▖ ▗▖ ▗▖ ▗▄▖ ▗▖  ▗▖▗▄▄▄▖▗▖ ▗▖▗▖  ▗▖\n▐▌ ▐▌▐▌   ▐▌   ▐▌ ▐▌▐▛▚▖▐▌  █  ▐▌ ▐▌▐▌       ▐▌ ▐▌ ▐▌ ▐▌▐▌ ▐▌▐▛▚▖▐▌  █  ▐▌ ▐▌▐▛▚▞▜▌\n▐▛▀▚▖▐▛▀▀▘▐▌▝▜▌▐▌ ▐▌▐▌ ▝▜▌  █  ▐▌ ▐▌ ▝▀▚▖    ▐▌ ▐▌ ▐▌ ▐▌▐▛▀▜▌▐▌ ▝▜▌  █  ▐▌ ▐▌▐▌  ▐▌\n▐▙▄▞▘▐▙▄▄▖▝▚▄▞▘▝▚▄▞▘▐▌  ▐▌▗▄█▄▖▝▚▄▞▘▗▄▄▞▘    ▐▙▄▟▙▖▝▚▄▞▘▐▌ ▐▌▐▌  ▐▌  █  ▝▚▄▞▘▐▌  ▐▌ v0.0.1\nTiny for Tinies\n\nBooting..."                                                                                   
+                                                                                   
+                                                                                   
