@@ -175,11 +175,11 @@ typedef struct
 
 /* Global register block address definitions. */
 #define RCC           ( ( RCC_TypeDef * )         0x40021000 )
-#define GPIOA         ( ( GPIO_TypeDef * )        0x40010800 )
+/*#define GPIOA         ( ( GPIO_TypeDef * )        0x40010800 )
 #define GPIOB         ( ( GPIO_TypeDef * )        0x40010C00 )
 #define GPIOC         ( ( GPIO_TypeDef * )        0x40011000 )
 #define GPIOD         ( ( GPIO_TypeDef * )        0x40011400 )
-#define GPIOE         ( ( GPIO_TypeDef * )        0x40011800 )
+#define GPIOE         ( ( GPIO_TypeDef * )        0x40011800 )*/
 #define AFIO          ( ( AFIO_TypeDef * )        0x40010000 )
 #define DMA1          ( ( DMA_TypeDef * )         0x40020000 )
 #define DMA2          ( ( DMA_TypeDef * )         0x40020400 )

@@ -1,5 +1,5 @@
 OUTPUT_ARCH( "riscv" )
-ENTRY( reset_handler )
+ENTRY( begios_boot )
 
 MEMORY
 { 
