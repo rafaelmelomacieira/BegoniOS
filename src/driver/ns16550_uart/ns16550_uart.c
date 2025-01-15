@@ -11,13 +11,18 @@
  @author Rafael Macieira <rfamm01@protonmail.com>
  */
 
+#ifdef BM_UART_NS16550
+
 #include <ns16550_uart.h>
 
-begios_drv_typedef* _ns16550_uart_init(char* name, uint32_t base_address){
-    __ns16550_uart_typedef = base_address;
+#pragma GCC push_options
+#pragma GCC section .text.modules
+
+begios_drv_typedef* _ns16550_uart_init(){
+    __ns16550_uart_typedef = BM_UART_NS16550;
     __ns16550_uart_drv_ref = (begios_drv_typedef*) malloc(sizeof(begios_drv_typedef));
-    __ns16550_uart_drv_ref->name = name;
-    __ns16550_uart_drv_ref->addr = base_address;
+    __ns16550_uart_drv_ref->name = "UART NS16550";
+    __ns16550_uart_drv_ref->addr = BM_UART_NS16550;
     __ns16550_uart_drv_ref->open = ns16550_uart_open;
     __ns16550_uart_drv_ref->close = ns16550_uart_close;
     __ns16550_uart_drv_ref->reset = ns16550_uart_reset;
@@ -50,3 +55,7 @@ uint32_t ns16550_uart_read(uint32_t* reg){
 void ns16550_uart_write(uint32_t* reg, uint32_t data){
   *reg = data;
 }
+
+#pragma GCC pop_options
+
+#endif BM_UART_NS16550

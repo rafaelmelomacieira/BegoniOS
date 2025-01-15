@@ -1,4 +1,5 @@
-# .equ UART_BASE, 0x10000000
+#include "modules.S"
+
 .type bootloader, %object
 .section .boot,"a",%progbits
 bootloader:
@@ -15,7 +16,7 @@ begioslogo: .string "\n\nRISC-V - RV32I - QEMU VIRT\n▗▄▄▖ ▗▄▄▄�
 
 .section .text.kernel
 
-.global add_irq_handler
+# .global add_irq_handler
 .type add_irq_handler,@function
 add_handler:
   lw a0, 0(sp)
@@ -24,25 +25,31 @@ add_handler:
   slli a0, a0, 0x2
   add a0,a0, a2
   sw a1, (a0)
+  addi sp, sp, 0x08 # estudar retorno de pilha
   ret
 
-                      # Start Bootloader
-  call printlogo      # Print logo
+begios_boot:
+  addi sp, sp, -0x04 
+  la a0, add_handler
+  sw a0, 0(sp)
+  call __begios_start
+ 
+# 
 
-looptrue :	j looptrue          # End program; spin forever
+# call printlogo      # Print logo
 
-printlogo:
+# printlogo:
                       # Config UART
-  la a0, begioslogo   
-  li a1, UART_BASE    
-1:                    
-  lb t0, 0(a0)        
-  beq zero, t0, 2f    
-  sb t0, (a1)         
-  addi a0, a0, 1      
-  j 1b                
-2:                    
-  ret
+#  la a0, begioslogo   
+#  li a1, UART_BASE    
+# 1:                    
+#  lb t0, 0(a0)        
+#  beq zero, t0, 2f    
+#  sb t0, (a1)         
+#  addi a0, a0, 1      
+#  j 1b                
+# 2:                    
+#  ret
 
 
 

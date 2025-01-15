@@ -12,4 +12,4 @@ typedef struct
     void (*reset)();
     int32_t (*read)(uint32_t* reg);
     void (*write)(uint32_t* reg, uint32_t data);
-} begio_mod_typedef;
+} begios_mod_typedef;
