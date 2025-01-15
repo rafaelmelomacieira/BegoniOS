@@ -21,3 +21,4 @@
 
 # Supported Platforms 
 - GD32VF103 Longan Nano
+- QEMU virtual machine platform
