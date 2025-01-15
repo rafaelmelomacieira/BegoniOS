@@ -1,27 +1,52 @@
-.equ UART_BASE, 0x10000000
+# .equ UART_BASE, 0x10000000
+.type bootloader, %object
+.section .boot,"a",%progbits
+bootloader:
+j begios_boot
 
-.section .text
-  la a0, begioslogo   # Load address of string
-  li a1, UART_BASE    # Load uart tx base address
-  call puts           # Print string
+.section data.kernel.vector_table.irq,"a",%progbits
+.type irq_v_table, %object
+irq_v_table:
+  .word 0
 
-loop:	j loop          # End program; spin forever
+.global begioslogo
+.section data.kernel.logo,"aw",%progbits
+begioslogo: .string "\n\nRISC-V - RV32I - QEMU VIRT\n▗▄▄▖ ▗▄▄▄▖ ▗▄▄▖ ▗▄▖ ▗▖  ▗▖▗▄▄▄▖ ▗▄▖  ▗▄▄▖    ▗▄▄▄▖ ▗▖ ▗▖ ▗▄▖ ▗▖  ▗▖▗▄▄▄▖▗▖ ▗▖▗▖  ▗▖\n▐▌ ▐▌▐▌   ▐▌   ▐▌ ▐▌▐▛▚▖▐▌  █  ▐▌ ▐▌▐▌       ▐▌ ▐▌ ▐▌ ▐▌▐▌ ▐▌▐▛▚▖▐▌  █  ▐▌ ▐▌▐▛▚▞▜▌\n▐▛▀▚▖▐▛▀▀▘▐▌▝▜▌▐▌ ▐▌▐▌ ▝▜▌  █  ▐▌ ▐▌ ▝▀▚▖    ▐▌ ▐▌ ▐▌ ▐▌▐▛▀▜▌▐▌ ▝▜▌  █  ▐▌ ▐▌▐▌  ▐▌\n▐▙▄▞▘▐▙▄▄▖▝▚▄▞▘▝▚▄▞▘▐▌  ▐▌▗▄█▄▖▝▚▄▞▘▗▄▄▞▘    ▐▙▄▟▙▖▝▚▄▞▘▐▌ ▐▌▐▌  ▐▌  █  ▝▚▄▞▘▐▌  ▐▌ v0.0.1\nTiny for Tinies\n\nBooting..."
 
-puts:
-  # a0 - String address
-  # a1 - UART base address
-1:                    # While string byte is not null
-  lb t0, 0(a0)        # Get byte at current string pos
-  beq zero, t0, 2f    # Is null?
-  sb t0, (a1)         # No, write byte to port
-  addi a0, a0, 1      # Inc string pos
-  j 1b                # Loop
-2:                    # String byte is null
+.section .text.kernel
+
+.global add_irq_handler
+.type add_irq_handler,@function
+add_handler:
+  lw a0, 0(sp)
+  lw a1, 4(sp)
+  la a2, vtable
+  slli a0, a0, 0x2
+  add a0,a0, a2
+  sw a1, (a0)
+  ret
+
+                      # Start Bootloader
+  call printlogo      # Print logo
+
+looptrue :	j looptrue          # End program; spin forever
+
+printlogo:
+                      # Config UART
+  la a0, begioslogo   
+  li a1, UART_BASE    
+1:                    
+  lb t0, 0(a0)        
+  beq zero, t0, 2f    
+  sb t0, (a1)         
+  addi a0, a0, 1      
+  j 1b                
+2:                    
   ret
 
 
 
-.section .data
- begioslogo: .string "\n\nRISC-V - RV32I - QEMU VIRT\n▗▄▄▖ ▗▄▄▄▖ ▗▄▄▖ ▗▄▖ ▗▖  ▗▖▗▄▄▄▖ ▗▄▖  ▗▄▄▖    ▗▄▄▄▖ ▗▖ ▗▖ ▗▄▖ ▗▖  ▗▖▗▄▄▄▖▗▖ ▗▖▗▖  ▗▖\n▐▌ ▐▌▐▌   ▐▌   ▐▌ ▐▌▐▛▚▖▐▌  █  ▐▌ ▐▌▐▌       ▐▌ ▐▌ ▐▌ ▐▌▐▌ ▐▌▐▛▚▖▐▌  █  ▐▌ ▐▌▐▛▚▞▜▌\n▐▛▀▚▖▐▛▀▀▘▐▌▝▜▌▐▌ ▐▌▐▌ ▝▜▌  █  ▐▌ ▐▌ ▝▀▚▖    ▐▌ ▐▌ ▐▌ ▐▌▐▛▀▜▌▐▌ ▝▜▌  █  ▐▌ ▐▌▐▌  ▐▌\n▐▙▄▞▘▐▙▄▄▖▝▚▄▞▘▝▚▄▞▘▐▌  ▐▌▗▄█▄▖▝▚▄▞▘▗▄▄▞▘    ▐▙▄▟▙▖▝▚▄▞▘▐▌ ▐▌▐▌  ▐▌  █  ▝▚▄▞▘▐▌  ▐▌ v0.0.1\nTiny for Tinies\n\nBooting..."                                                                                   
+
+                                                                                   
                                                                                    
                                                                                    

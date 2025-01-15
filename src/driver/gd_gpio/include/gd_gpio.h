@@ -18,9 +18,9 @@ typedef struct
 extern gd_gpio_hal_typedef* __gd_gpio_hal;
 
 void _gd_gpio_init(uint32_t base_address);
-void gd_gpio_open();
-void gd_gpio_close();
-void gd_gpio_reset();
-void gd_gpio_irq_handler(uint32_t irq_id);
+void ns16550_uart_open();
+void ns16550_uart_close();
+void ns16550_uart_reset();
+void ns16550_uart_irq_handler(uint32_t irq_id);
 uint32_t gd_gpio_read(uint32_t* reg);
 void gd_gpio_write(uint32_t* reg, uint32_t data);

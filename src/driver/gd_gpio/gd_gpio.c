@@ -13,17 +13,17 @@
 
 #include <gd_gpio.h>
 
-begios_drv_typedef* _gd_gpio_init(char* name, uint32_t base_address){
+begios_drv_typedef* _ns16550_uart_init(char* name, uint32_t base_address){
     __gd_gpio_typedef = base_address;
     __gd_gpio_drv_ref = (begios_drv_typedef*) malloc(sizeof(begios_drv_typedef));
     __gd_gpio_drv_ref->name = name;
     __gd_gpio_drv_ref->addr = base_address;
-    __gd_gpio_drv_ref->open = _gd_dma_open;
-    __gd_gpio_drv_ref->close = gd_gpio_close;
-    __gd_gpio_drv_ref->reset = gd_gpio_reset;
-    __gd_gpio_drv_ref->irq_handler = gd_gpio_irq_handler;
+    __gd_gpio_drv_ref->open = gd_dma_open;
+    __gd_gpio_drv_ref->close = gd_dma_close;
+    __gd_gpio_drv_ref->reset = gd_dma_reset;
+    __gd_gpio_drv_ref->irq_handler = ns16550_uart_irq_handler;
     __gd_gpio_drv_ref->read = gd_dma_read;
-    __gd_gpio_drv_ref->read = gd_dma_write;
+    __gd_gpio_drv_ref->read = gd_gpio_write;
     gd_gpio_reset();
 }
 
