@@ -1,4 +1,4 @@
-![BegoniOS](https://img.shields.io/badge/BegoniOS-Risc--v-green?labelColor=darkgreen&style=flat) ![RV32I](https://img.shields.io/badge/RV32I-darkgreen?style=flat)
+![BegoniOS](https://img.shields.io/badge/BegoniOS-RISC--V-blue?labelColor=darkblue&style=flat) ![RV32I](https://img.shields.io/badge/RV32I-lightyellow?style=flat) ![RV32I](https://img.shields.io/badge/RV32IMAC-yellow?style=flat)
 ```
 888888b.                                       d8b  .d88888b.   .d8888b.  
 888  "88b                                      Y8P d88P" "Y88b d88P  Y88b 
@@ -15,8 +15,10 @@
 "Tiny for Tinies"
 # BegoniOS
 
-# Architectures Supported
+# Supported Architectures
+- RV32I
 - RV32IMAC
 
-# Platforms Supported
-- gd32vf103_longan_nano
+# Supported Platforms 
+- GD32VF103 Longan Nano
+- QEMU virtual machine platform
