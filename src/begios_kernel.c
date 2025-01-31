@@ -14,3 +14,7 @@
 #include <begios_kernel.h>
 
 
+
+void __begios_start(void (*add_handler)(uint32_t irq_vetor_pos, void (*handler)())){
+  while(1);  
+}

@@ -20,7 +20,7 @@ typedef struct
   volatile uint32_t SPR;
 } ns16550_uart_hal_typedef; 
 
-extern ns16550_uart_hal_typedef* __gd_gpio_hal;
+extern ns16550_uart_hal_typedef* __ns16550_uart_hal;
 
 void ns16550_uart_init() __attribute__((section(".data.modules.ref")));
 void ns16550_uart_open();

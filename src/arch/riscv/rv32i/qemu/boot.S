@@ -1,4 +1,4 @@
-#include "modules.S"
+# include "modules.S"
 
 .type bootloader, %object
 .section .boot,"a",%progbits
@@ -21,7 +21,7 @@ begioslogo: .string "\n\nRISC-V - RV32I - QEMU VIRT\n▗▄▄▖ ▗▄▄▄�
 add_handler:
   lw a0, 0(sp)
   lw a1, 4(sp)
-  la a2, vtable
+  la a2, irq_v_table
   slli a0, a0, 0x2
   add a0,a0, a2
   sw a1, (a0)

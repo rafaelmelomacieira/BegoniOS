@@ -19,7 +19,7 @@
 #pragma GCC section .text.modules
 
 begios_drv_typedef* _ns16550_uart_init(){
-    __ns16550_uart_typedef = BM_UART_NS16550;
+    __ns16550_uart_hal = BM_UART_NS16550;
     __ns16550_uart_drv_ref = (begios_drv_typedef*) malloc(sizeof(begios_drv_typedef));
     __ns16550_uart_drv_ref->name = "UART NS16550";
     __ns16550_uart_drv_ref->addr = BM_UART_NS16550;
